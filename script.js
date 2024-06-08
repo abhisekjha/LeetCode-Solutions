@@ -11,9 +11,23 @@ $(document).ready(function() {
         });
     }
 
+    // Function to fetch and display a problem's solution
+    function showSolution(category, problem) {
+        $.get(category + '/' + problem + '/solution.py', function(solution) {
+            $('#solution').html('<h2>Solution for ' + problem + '</h2><pre>' + solution + '</pre>');
+        });
+    }
+
     // Event listener for clicking on a category
     $('#categories').on('click', 'li', function() {
         var category = $(this).text().trim();
         showProblems(category);
+    });
+
+    // Event listener for clicking on a problem
+    $('#problems').on('click', 'li', function() {
+        var category = $('#categories li.active').text().trim();
+        var problem = $(this).text().trim();
+        showSolution(category, problem);
     });
 });

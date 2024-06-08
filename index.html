@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>LeetCode Solutions</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Python Files in Directory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .file {
+            color: green;
+        }
+    </style>
 </head>
 <body>
-    <h1>LeetCode Solutions</h1>
+    <h1>Python Files in Directory</h1>
+    <ul id="fileList"></ul>
 
-    <div id="categories"></div>
-    <div id="problems"></div>
+    <script>
+        const fileList = document.getElementById('fileList');
 
-    <script src="script.js"></script>
+        fetch('https://api.github.com/repos/abhisekjha/LeetCode-Solutions/contents')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(file => {
+                    if (file.type === 'file' && file.name.endsWith('.py')) {
+                        const li = document.createElement('li');
+                        li.textContent = file.name;
+                        li.className = 'file';
+                        fileList.appendChild(li);
+                    }
+                });
+            });
+    </script>
 </body>
 </html>
