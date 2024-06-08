@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LeetCode Solutions</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>LeetCode Solutions</h1>
+
+    <div id="categories"></div>
+    <div id="problems"></div>
+
+    <script>
+        $(document).ready(function() {
+            var categories = ['Easy', 'Medium', 'Hard'];
+
+            $('#categories').html('<h2>Categories</h2><ul>' + categories.map(category => '<li>' + category + '</li>').join('') + '</ul>');
+
+            var problems = {
+                'Easy': ['Arrays', 'Strings', 'Linked Lists'],
+                'Medium': ['Arrays', 'Strings', 'Linked Lists'],
+                'Hard': ['Arrays', 'Strings', 'Linked Lists']
+            };
+
+            function showProblems(category) {
+                var problemList = problems[category].map(problem => '<li>' + problem + '</li>').join('');
+                $('#problems').html('<h2>' + category + '</h2><ul>' + problemList + '</ul>');
+            }
+
+            $('#categories').on('click', 'li', function() {
+                var category = $(this).text().trim();
+                showProblems(category);
+            });
+        });
+    </script>
+</body>
+</html>
